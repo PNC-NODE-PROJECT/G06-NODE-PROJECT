@@ -7,8 +7,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 // import model collection 
-const quizModel = require("./model/quizz_model").quizModel;
-const userModel = require("./model/quizz_model").userModel;
+const quizModel = require("./models/quizz_models").quizModel;
+const userModel = require("./models/quizz_models").userModel;
 
 // Define static route
 app.use(express.static("public"));
