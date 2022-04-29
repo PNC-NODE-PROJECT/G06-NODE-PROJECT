@@ -23,7 +23,6 @@ app.get('/get_question',(req,res)=>{
     quizModel.find()
       .then((result)=>{
         res.send(result);
-          // res.send(result);
       })
       .catch((error)=>{
           res.send(error);
