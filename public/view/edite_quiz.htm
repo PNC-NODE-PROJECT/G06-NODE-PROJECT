@@ -55,11 +55,10 @@
       </section>
 
       <!-- show question -->
-    <section class="m-3">
+    <section class="m-3" id="questions-view">
         <h4 class="fw-bold text-center mt-3">Show Question</h4>
-        <div class="row col-6 m-auto shadow-lg p-3 mb-5 bg-body rounded border-start border-primary border-3">
-          <h4 class="fw-bold text-center mt-3"></h4>
-          <form class=" bg-white px-4" action="">
+        <div class="row col-6 m-auto shadow-lg p-3 mb-5 bg-body rounded border-start border-primary border-3" id="questions-container">
+          <div class=" bg-white px-4">
             <p class="fw-bold">How satisfied are you with our product?</p>
             <div class="form-check mb-2 border-bottom border-primary border-2">
               <p>answer1...</p>
@@ -73,10 +72,10 @@
             <div class="form-check mb-2 border-bottom border-primary border-2">
               <p>answer4...</p>
             </div>
-          </form>
+          </div>
           <div class="text-end">
-            <button type="button" class="btn btn-primary" id="edite">Edite</button>
-            <button type="button" class="btn btn-primary" id="delete">Delete</button>
+            <button type="submit" class="btn btn-danger" id="delete">Delete</button>
+            <button type="submit" class="btn btn-primary" id="edite">Edite</button>
           </div>
         </div>
       </section>
