@@ -9,13 +9,13 @@
 
 </head>
 <body>
-    <!-- edite qiuz -->
     
-    <!-- add question -->
-    <div class="fixed-top ml-2" >
-      <a href="../view/home.html" class="btn btn-primary">back</a>
-    </div>
-    <section class="m-3 ">
+    
+  <div class="fixed-top ml-2" >
+    <a href="../view/home.html" class="btn btn-primary">back</a>
+  </div>
+  <!-- add question -->
+    <section class="m-3 " id="add">
         <div class="row col-6 m-auto ">
           <div class="row rounded border-top border-start border-primary border-3 shadow-lg p-3 mb-5 bg-body rounded">
             <div class="input-group m-3 border-0">
@@ -45,10 +45,48 @@
             </div>
           </div>
           <div class="text-end">
+            <button type="submit" class="btn btn-primary" id="cancel_add">Cancel</button>
             <button type="submit" class="btn btn-primary" id="create">Create</button>
           </div>
         </div>
       </section>
+
+      <!-- edite question -->
+    <section class="m-3 " id="update">
+      <div class="row col-6 m-auto ">
+        <div class="row rounded border-top border-start border-primary border-3 shadow-lg p-3 mb-5 bg-body rounded">
+          <div class="input-group m-3 border-0">
+            <h3 class="text-center text-primary">Edite Your Question</h3>
+          </div>
+        </div>
+        <div class=" row px-4 rounded border-start border-primary border-3 mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+          <div class="input-group m-3 ">
+            <label class="input-group-text border-0 bg-white fw-bold" for="questions">Question: </label>
+            <input type="text" class="form-control rounded " id="questions"/>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input choises" type="radio" name="correct" />
+            <input type="text" class="form-control rounded" id="ans1" placeholder="answer1"/>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input choises" type="radio" name="correct"  />
+            <input type="text" class="form-control rounded" id="ans2" placeholder="answer2"/>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input choises" type="radio" name="correct" />
+            <input type="text" class="form-control rounded" id="ans3" placeholder="answer3"/>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input choises" type="radio" name="correct"  />
+            <input type="text" class="form-control rounded" id="ans4" placeholder="answer4"/>
+          </div>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary" id="cancel_update">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="edite">Update</button>
+        </div>
+      </div>
+    </section>
 
       <!-- show question -->
     <section class="m-3" id="questions-view">

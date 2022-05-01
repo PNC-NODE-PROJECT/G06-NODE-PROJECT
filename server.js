@@ -17,7 +17,15 @@ app.use(express.static("public"));
 app.listen(PORT, () => {
     console.log("Server run on http://localhost:3000");
   });
-
+// get question by id
+app.get('/get_question_by_id/:id',(req,res)=>{
+  quizModel.find({_id:req.params.id})
+  .then((result) => {
+    res.send(result);
+  }).catch((err) => {
+    res.send(err);
+  });
+})
 //   get all the question 
 app.get('/get_question',(req,res)=>{
     quizModel.find()

@@ -1,21 +1,46 @@
-
-
+// DOM ELEMENT  -------------------------
 let dom_questions_view = document.getElementById("questions-view");
+let dom_add=document.getElementById('add');
+let dom_update=document.getElementById('update');
+// INPUT CREATE -----------------
 let question=document.getElementById('question');
 let answer1=document.getElementById('answer1');
 let answer2=document.getElementById('answer2');
 let answer3=document.getElementById('answer3');
 let answer4=document.getElementById('answer4');
 let correct=document.querySelectorAll(".choise");
+// INPUT EDITE--------------------
+let quest=document.getElementById('question');
+let answers1=document.getElementById('ans1');
+let answers2=document.getElementById('ans2');
+let answers3=document.getElementById('ans3');
+let answers4=document.getElementById('ans4');
+let corrects=document.querySelectorAll(".choises");
+// BUTTON-----------------
+let btn_create_question=document.getElementById('create');
+let btn_cancel_add=document.getElementById('cancel_add');
+let btn_cancel_update=document.getElementById('cancel_update');
+let btn_update=document.getElementById('edite');
+// globle id
+let taskID=0;
 
 
-// add question
+// HIDE / SHOW ---------------------------------------------------------
+hide(dom_update);
+function hide(element) {
+    element.style.display = "none";
+  }
+  function show(element) {
+    element.style.display = "block";
+  }
+
+// add question---------------------
 function add_question(event){
     event.preventDefault();
     let correct_answer="";
     for(let i=0;i<correct.length;i++){
         if(correct[i].checked){
-            correct_answer="answer"+(i+1)
+            correct_answer="answer"+[i+1]
         }
     }
     if( question.value!=='' && answer1.value!=='' && answer2.value!=='' && answer3.value!=='' && answer3.value!=='' && correct_answer!==''){
@@ -30,9 +55,7 @@ function add_question(event){
                     },
                         'correctAnswer':correct_answer
                 }
-        axios.post(url,body).then((res)=>{
-            console.log(res);
-        })
+        axios.post(url,body).then((res)=>{console.log(res);})
         // clear input
         clearInput();
         // display question
@@ -42,7 +65,8 @@ function add_question(event){
     }
 }
 
-// clear input
+
+// clear input---------------------------------------
 function clearInput(){
     document.getElementById('question').value="";
     document.getElementById('answer1').value="";
@@ -54,20 +78,66 @@ function clearInput(){
        ele[i].checked = false;  
    }
   }
+// get a question by id-----------------
+function get_question_by_id(id){
+    axios.get('/get_question_by_id/'+id).then((result) => {
+        let questions=result.data[0];
 
-// display the questions
+        document.getElementById('questions').value=questions.question;   
+        let choises = document.querySelectorAll('.choises');      
+        for(let i=1;i<choises.length+1;i++){
+            let ans='ans'+i
+            document.getElementById(ans).value= questions.answers['answer'+i];
+            if(questions.correctAnswer=="answer"+i){
+                choises[i-1].checked=true;
+            }
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+// edite--------------
+function edite_question(e){
+    e.preventDefault();
+    let correct_answer="";
+    for(let i=0;i<corrects.length;i++){
+        if(corrects[i].checked){
+            correct_answer="answer"+[i+1]
+        }
+    }
+    
+    let conf=confirm("To make sure you want to update it!");
+    if(conf ){
+        let url="/update_data/";
+        let body={
+                    'question':quest.value,
+                    'answers':{
+                        'answer1':answers1.value,
+                        'answer2':answers2.value,
+                        'answer3':answers3.value,
+                        'answer4':answers4.value
+                    },
+                        'correctAnswer':correct_answer
+                }
+        axios.put(url+taskID,body).then((res)=>{
+            console.log(res);
+            hide(dom_update);
+            show(dom_questions_view);
+            show(dom_add);
+        })
+        // display question
+        display_question();
+        
+    }
+}
+// display the questions------------------------------
 function display_question(){
     axios.get('/get_question').then((result) => {
-        let question_data=result.data;
-        console.log(question_data);
-        
+        let question_data=result.data;       
         // Remove the question view 
         while (dom_questions_view.firstChild) {
             dom_questions_view.removeChild(dom_questions_view.lastChild);
         }
-
-
-
         for(let i=0;i<question_data.length;i++){
             // create a new card container 
             dom_questions_container = document.createElement("div");
@@ -155,7 +225,6 @@ function display_question(){
             btn_edite.textContent="edite"
             dom_btn.appendChild(btn_edite)
         }
-        console.log(dom_questions_view);
     }).catch((err) => {
         console.log(err);
     });
@@ -164,28 +233,36 @@ function display_question(){
 function delete_edite_question(e){
     e.preventDefault();
   if (e.target.id === "delete") {
-    let isExecuted = confirm("Are you sure to delete this task?");
+    let isExecuted = confirm("Are you sure to delete this question?");
     if (isExecuted) {
       // TODO: Request to the server to detele one task
-      const taskID = e.target.parentElement.id;
-      console.log(taskID);
+      taskID = e.target.parentElement.id;
       axios.delete("/delete_data/"+taskID).then((response)=>{
         console.log(response);
       });       
 
     }
   } else if (e.target.id === "edite") {
+      hide(dom_add);
+      hide(dom_questions_view);
+      show(dom_update);
     // TODO: Request to the server to update one task as completed
-    const taskID = e.target.parentElement.id;
-    axios.put("/update_data/"+taskID).then((res)=>{
-      console.log(res);
-    })
+    taskID = e.target.parentElement.id;
+    get_question_by_id(taskID);
+
   }
-  //DISPLAY TASKS
+  //DISPLAY question
   display_question();
 }
 display_question();
 // create btn
-const btn_create_question=document.getElementById('create');
+
 btn_create_question.addEventListener('click',add_question);
 dom_questions_view.addEventListener("click",delete_edite_question);
+btn_cancel_add.addEventListener('click',clearInput);
+btn_cancel_update.addEventListener('click',function(){
+    show(dom_add);
+    show(dom_questions_view);
+    hide(dom_update);
+});
+btn_update.addEventListener("click",edite_question);
