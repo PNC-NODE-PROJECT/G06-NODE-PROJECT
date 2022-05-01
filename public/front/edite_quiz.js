@@ -10,7 +10,7 @@ let answer3=document.getElementById('answer3');
 let answer4=document.getElementById('answer4');
 let correct=document.querySelectorAll(".choise");
 // INPUT EDITE--------------------
-let quest=document.getElementById('question');
+let quest=document.getElementById('questions');
 let answers1=document.getElementById('ans1');
 let answers2=document.getElementById('ans2');
 let answers3=document.getElementById('ans3');
@@ -119,6 +119,7 @@ function edite_question(e){
                     },
                         'correctAnswer':correct_answer
                 }
+        console.log(body);
         axios.put(url+taskID,body).then((res)=>{
             console.log(res);
             hide(dom_update);
