@@ -44,7 +44,7 @@ function add_question(event){
         }
     }
     if( question.value!=='' && answer1.value!=='' && answer2.value!=='' && answer3.value!=='' && answer3.value!=='' && correct_answer!==''){
-        let url="/add_question";
+        let url="/question/add_question";
         let body={
                     'question':question.value,
                     'answers':{
@@ -80,7 +80,7 @@ function clearInput(){
   }
 // get a question by id-----------------
 function get_question_by_id(id){
-    axios.get('/get_question_by_id/'+id).then((result) => {
+    axios.get('/question/get_question_by_id/'+id).then((result) => {
         let questions=result.data[0];
 
         document.getElementById('questions').value=questions.question;   
@@ -108,7 +108,7 @@ function edite_question(e){
     
     let conf=confirm("To make sure you want to update it!");
     if(conf ){
-        let url="/update_data/";
+        let url="/question/update_data/";
         let body={
                     'question':quest.value,
                     'answers':{
@@ -133,7 +133,7 @@ function edite_question(e){
 }
 // display the questions------------------------------
 function display_question(){
-    axios.get('/get_question').then((result) => {
+    axios.get('/question/get_question').then((result) => {
         let question_data=result.data;       
         // Remove the question view 
         while (dom_questions_view.firstChild) {
@@ -238,7 +238,7 @@ function delete_edite_question(e){
     if (isExecuted) {
       // TODO: Request to the server to detele one task
       taskID = e.target.parentElement.id;
-      axios.delete("/delete_data/"+taskID).then((response)=>{
+      axios.delete("/question/delete_data/"+taskID).then((response)=>{
         console.log(response);
       });       
 

@@ -1,7 +1,7 @@
 const username = document.querySelector("#usernamelg");
 const password = document.getElementById("passwordlg");
 const button_signup = document.querySelector("#sing_up");
-const URL = "http://localhost:3000";
+const URL = "http://localhost:3000/users";
 
 function login(e){
     e.preventDefault();

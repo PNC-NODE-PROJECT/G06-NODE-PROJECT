@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000";
+const URL = "http://localhost:3000/question";
 const playQuizDom = document.getElementById("playQuizDom");
 const QuizResultDom = document.getElementById("QuizResultDom");
 const box = document.getElementById("box-result")
@@ -82,13 +82,22 @@ function computeScore(){
         let percentage = parseInt((numberofcorrectAnswer*100)/allquestion.length);
         h3.textContent = percentage +"%";
         if (percentage==100){
-            box.style.backgroundColor = "rgb(116, 236, 46)";
+            box.style.backgroundColor = "green";
         }else if (percentage<80 && percentage>60){
             box.style.backgroundColor = "rgb(116, 236, 46)";
-        }else if (percentage==0){
+        }else if (percentage==50){
+            box.style.backgroundColor = "orange";
+        }else if (percentage>=25 && percentage<50){
+            box.style.backgroundColor = "rgb(235, 108, 29)";
+        }else if (percentage<25){
             box.style.backgroundColor = "red";
         }
     });
+    setTimeout(showResult, 500);
+   
+}
+
+function showResult (){
     hide(playQuizDom);
     show(QuizResultDom);
 }
