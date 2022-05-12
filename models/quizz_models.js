@@ -1,9 +1,9 @@
 const mongoose = require ("mongoose");
 
-
-
+// Require for env file
+require('dotenv').config();
 // connect to mongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/quizz_app',{useUnifiedTopology:true});  
+mongoose.connect(process.env.DB_CONNECTION,{useUnifiedTopology:true});  
 
 // define schema for each collection
 const quizzSchema = new mongoose.Schema({

@@ -1,7 +1,7 @@
 const username = document.querySelector("#username");
 const password = document.getElementById("password");
 const button_signup = document.querySelector("#sing_up");
-const URL = "http://localhost:3000/users";
+const URL = "/users";
 
 
 function createUser(e){

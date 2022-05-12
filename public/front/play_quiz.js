@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/question";
+const URL = "/question";
 const playQuizDom = document.getElementById("playQuizDom");
 const QuizResultDom = document.getElementById("QuizResultDom");
 const box = document.getElementById("box-result")
