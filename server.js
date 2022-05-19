@@ -13,6 +13,8 @@ const PORT = process.env.PORTS
 
 // Define static route
 app.use(express.static("public"));
+app.use(express.static("view"));
+
 
 // server
 app.listen(PORT, () => {
